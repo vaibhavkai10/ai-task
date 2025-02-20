@@ -1,6 +1,7 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 import {
   Tooltip,
   TooltipContent,
@@ -40,6 +41,8 @@ const Sidebar = ({
   isDarkMode = false,
   onThemeToggle = () => {},
 }: SidebarProps) => {
+  const navigate = useNavigate();
+
   const navigationItems = [
     { icon: Home, label: "Home", href: "/" },
     { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard" },
@@ -48,6 +51,10 @@ const Sidebar = ({
     { icon: Settings, label: "Settings", href: "/settings" },
     { icon: HelpCircle, label: "Help", href: "/help" },
   ];
+
+  const handleNavigation = (href: string) => {
+    navigate(href);
+  };
 
   return (
     <div
@@ -76,6 +83,7 @@ const Sidebar = ({
                 <Button
                   variant="ghost"
                   className="w-full justify-start space-x-3"
+                  onClick={() => handleNavigation(item.href)}
                 >
                   <item.icon className="h-5 w-5" />
                   <span>{item.label}</span>
